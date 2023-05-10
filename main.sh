@@ -1,18 +1,37 @@
 #!/bin/bash
+
+#PS3 variable is the select prompt variable
 PS3="Alegeti optiunea: "
 
+#array of options -- exit is included in the select loop
 optiuni=("Creati fisier .csv" "Adauga inregistrare" "Sterge o inregistrare" "Actualizeaza o inregistrare")
 
+#loop forever
 while true; do
+    #selects from the array of options and an extra quit option
     select optiune in "${optiuni[@]}" Iesire
     do
+        #select auto updates the variable REPLY into what the user inputs
         case $REPLY in
-            1) echo "Vom crea fisierul csv!"; break;;
-            2) echo "Adaugam inregistrarea!"; break;;
-            3) echo "Inregistrarea se va sterge permanent!"; break;;
-            4) echo "Vom actualiza inregistrarea!"; break;;
-            $((${#optiuni[@]}+1))) echo "Ok"; break 2;;
-            *) echo "Alegere invalida!"; break;;
+            1) echo "Vom crea fisierul csv!"; 
+            echo;
+            break;;
+            2) echo "Adaugam inregistrarea!";
+            echo;
+            break;;
+            3) echo "Inregistrarea se va sterge permanent!";
+            echo;
+            break;;
+            4) echo "Vom actualiza inregistrarea!"; 
+            echo;
+            break;;
+            #exit option is always last so its number is the length of our array + 1
+            $((${#optiuni[@]}+1))) echo "Gata"; 
+            #break twice so we exit both the select loop and the while true loop
+            break 2;;
+            *) echo "Alegere invalida!"; 
+            echo;
+            break;;
         esac
     done
 done
