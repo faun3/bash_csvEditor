@@ -18,6 +18,7 @@ while true; do
             echo;
             break;;
             2) echo "Adaugam inregistrarea!";
+            /bin/bash ./function2.sh
             echo;
             break;;
             3) echo "Inregistrarea se va sterge permanent!";
