@@ -8,6 +8,7 @@ then
     do
         case $choice in
             1)
+                #we echo without the trailing endl ("-n") to maintain csv line integrity
                 echo -n 'id,name,email,grade' > data.csv;
                 echo
                 echo 'Fisierul a fost recreat (contine doar capul de tabel) '
