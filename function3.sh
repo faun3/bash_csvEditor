@@ -6,22 +6,25 @@ read -p "Indexul la care vreti sa efectuati stergerea este: " deleteIndex
 if [ -f copy.csv ]
 then
     echo -n "" > copy.csv
-do
+fi
+
+newID=1
 
 echo -n "id,name,email,grade" > copy.csv
 
-while IFS="," read -r id remainingData
-do
-    if [[ $id -ne $deleteIndex ]]
-    then
-        echo
-        echo -n "$id,$remainingData" >> copy.csv
+{
+    read
+    while IFS="," read -r id remainingData || [ -n "$remainingData" ]
+    do
+        if [[ $id != $deleteIndex ]]
+        then
+            echo >> copy.csv
+            echo -n "$newID,$remainingData" >> copy.csv
+            newID=$((newID+1))
+        fi
     done
+} < data.csv
 
-    newIndex=$deleteIndex
-
-    echo
-    echo -n "$newIndex,$remainingData" >> copy.csv
-done
+mv copy.csv data.csv
 
 exit
