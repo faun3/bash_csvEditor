@@ -13,7 +13,8 @@ while true; do
     do
         #select auto updates the variable REPLY into what the user inputs
         case $REPLY in
-            1) echo "Vom crea fisierul csv!"; 
+            1) echo "Vom crea fisierul csv!";
+            /bin/bash ./function1.sh 
             echo;
             break;;
             2) echo "Adaugam inregistrarea!";
