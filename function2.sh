@@ -19,6 +19,7 @@ then
 
     read -p "Introduceti nota: " newEntryGrade
 
+    #echo endl into file
     echo >> data.csv
     echo -n "$newEntryIndex,$newEntryName,$newEntryEmail,$newEntryGrade" >> data.csv
 else
