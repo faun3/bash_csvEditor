@@ -17,6 +17,7 @@ then
     do
         read -p "Introduceti numele: " newEntryName
 
+        # matches 3 or more letters (capital or lowercase)
         regex="[a-zA-Z]{3,}"
 
         if [[  $newEntryName =~ $regex ]]
@@ -49,7 +50,34 @@ then
         fi
     done
 
-    read -p "Introduceti nota: " newEntryGrade
+    while true
+    do
+        read -p "Introduceti nota: " newEntryGrade
+
+        #match digits 1-9 OR the string "10"
+            #at the start of the string
+            #we use () to surround a group so we can use "|" to OR the choices
+
+            # digits 1-9 get matched fully, so does "10"
+            # 11 does not get matched even partially
+            # -1 does not get matched even partially
+
+            #$ matches no other characters after so something like "1 0" won't trigger a match
+
+        regex="^([1-9]|10)$"
+
+        if [[ $newEntryGrade =~ $regex ]]
+        then
+            break;
+        else
+            read -p "Nota introdusa nu este corecta! Apasati 1 pentru a o introduce iar sau orice alta tasta pentru a anula aceasta operatie de adaugare " choice
+            if [[ $choice -ne 1 ]]
+            then
+                exit
+            fi
+        fi
+    done
+
 
     #echo endl into file
     echo >> data.csv
