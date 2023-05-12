@@ -13,7 +13,23 @@ then
     #compute new index
     newEntryIndex=$((lineCount+1))
 
-    read -p "Introduceti numele: " newEntryName
+    while true
+    do
+        read -p "Introduceti numele: " newEntryName
+
+        regex="[a-zA-Z]{3,}"
+
+        if [[  $newEntryName =~ $regex ]]
+        then
+            break;
+        else
+            read -p "Numele introdus nu pare corect! Apasati 1 pentru a-l introduce iar sau orice alta tasta pentru a anula aceasta operatie de adaugare. (Numele pot contine doar litere mici si mari): " choice
+            if [[ $choice -ne 1 ]]
+            then
+                exit
+            fi
+        fi
+    done
 
     while true
     do
