@@ -15,9 +15,10 @@ then
 
     read -p "Introduceti numele: " newEntryName
 
-    read -p "Introduceti email-ul: " newEntryEmail
     while true
     do
+        read -p "Introduceti email-ul: " newEntryEmail
+
         regex="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$"
 
         if [[ $newEntryEmail =~ $regex ]]
@@ -25,13 +26,10 @@ then
             break;
         else
             read -p "Adresa de email introdusa nu pare a fi corecta! Apasati 1 pentru a o introduce iar sau orice alta tasta pentru a anula aceasta operatie de adaugare " choice
-            case $choice in
-                1)
-                read -p "Introduceti email-ul: " newEntryEmail;
-                break;;
-                *)
+            if [[ $choice -ne 1 ]]
+            then
                 exit
-            esac
+            fi
         fi
     done
 
