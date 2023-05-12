@@ -22,6 +22,7 @@ while true; do
             echo;
             break;;
             3) echo "Inregistrarea se va sterge permanent!";
+            /bin/bash ./function3.sh
             echo;
             break;;
             4) echo "Vom actualiza inregistrarea!"; 
