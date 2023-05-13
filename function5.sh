@@ -7,13 +7,13 @@
     #this will move the header to the bottom, but we only want the first n rows anyway
 
 maxLines=$(wc -l < data.csv)
-regex='^([0-9])+$'
+regex='^[0-9]+$'
 
 read -p "Introduceti numarul de elevi: " lineNumber
 
 while true; do
-    if [[ $lineNumber -gt $maxLines ]]; then
-        read -p "Numarul introdus este mai mare decat numarul de inregistrari din fisier (${maxLines}). Apasati 1 pentru a introduce alta valoare sau orice alta tasta pentru a anula aceasta operatie de extragere: " choice
+    if ! [[ $lineNumber =~ $regex ]]; then
+        read -p "Valoarea introdusa nu pare sa fie un numar intreg. Apasati 1 pentru a introduce alta valoare sau orice alta tasta pentru a anula aceasta operatie de extragere: " choice
         if [[ $choice == 1 ]]; then
             read -p "Introduceti numarul de elevi: " lineNumber
         else
@@ -21,8 +21,8 @@ while true; do
             exit
         fi
     else
-        if ! [[ $lineNumber =~ $regex ]]; then
-            read -p "Valoarea introdusa nu pare sa fie un numar intreg. Apasati 1 pentru a introduce alta valoare sau orice alta tasta pentru a anula aceasta operatie de extragere: " choice
+        if [[ $lineNumber -gt $maxLines ]]; then
+            read -p "Numarul introdus este mai mare decat numarul de inregistrari din fisier (${maxLines}). Apasati 1 pentru a introduce alta valoare sau orice alta tasta pentru a anula aceasta operatie de extragere: " choice
             if [[ $choice == 1 ]]; then
                 read -p "Introduceti numarul de elevi: " lineNumber
             else
@@ -33,7 +33,7 @@ while true; do
             sort -t"," -k4 -n -r data.csv | head  -n $lineNumber
             break 2;
         fi
-    fi
+    fi  
 done
 
 exit
