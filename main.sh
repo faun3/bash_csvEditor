@@ -4,10 +4,11 @@
 PS3="Alegeti optiunea: "
 
 #array of options -- exit is included in the select loop
-optiuni=("Creati fisier .csv" "Adauga inregistrare" "Sterge o inregistrare" "Actualizeaza o inregistrare" "Extrage elevii cu cele mai mari note")
+optiuni=("Creati fisier .csv" "Adauga inregistrare" "Sterge o inregistrare" "Actualizeaza o inregistrare" "Afiseaza n elevi cu cele mai mari note")
 
 #loop forever
 while true; do
+    echo
     #selects from the array of options and an extra quit option
     select optiune in "${optiuni[@]}" Iesire
     do
