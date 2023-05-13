@@ -4,7 +4,7 @@
 PS3="Alegeti optiunea: "
 
 #array of options -- exit is included in the select loop
-optiuni=("Creati fisier .csv" "Adauga inregistrare" "Sterge o inregistrare" "Actualizeaza o inregistrare")
+optiuni=("Creati fisier .csv" "Adauga inregistrare" "Sterge o inregistrare" "Actualizeaza o inregistrare" "Extrage elevii cu cele mai mari note")
 
 #loop forever
 while true; do
@@ -27,6 +27,10 @@ while true; do
             break;;
             4) echo "Vom actualiza inregistrarea!"; 
             echo;
+            break;;
+            5)
+            echo;
+            /bin/bash ./function5.sh
             break;;
             #exit option is always last so its number is the length of our array + 1
             $((${#optiuni[@]}+1))) echo "Gata"; 
