@@ -1,0 +1,2 @@
+echo "extragem elevii"
+exit
