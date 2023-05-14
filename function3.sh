@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if ! [[ -f data.csv ]]; then
+    echo "Fisierul cu date nu exista!"
+    exit
+fi
+
 read -p "Indexul la care vreti sa efectuati stergerea este: " deleteIndex
 
 linePos=$((deleteIndex+1))

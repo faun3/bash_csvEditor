@@ -7,7 +7,6 @@
 if [ -f data.csv ]
 then
     echo "Vom adauga o noua inregistrare in fisierul date.csv"
-    echo
     #only get the integer from the "wc -l" command
     lineCount=$(wc -l < data.csv)
     #compute new index
@@ -36,6 +35,7 @@ then
     do
         read -p "Introduceti email-ul: " newEntryEmail
 
+        # copy pasted email regex from stackoverflow
         regex="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$"
 
         if [[ $newEntryEmail =~ $regex ]]
