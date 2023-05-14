@@ -18,15 +18,15 @@ while true; do
             /bin/bash ./function1.sh 
             echo;
             break;;
-            2) echo "Adaugam inregistrarea!";
+            2)
             /bin/bash ./function2.sh
             echo;
             break;;
-            3) echo "Inregistrarea se va sterge permanent!";
+            3)
             /bin/bash ./function3.sh
             echo;
             break;;
-            4) echo "Vom actualiza inregistrarea!"; 
+            4)
             echo;
             /bin/bash ./function4.sh
             break;;
