@@ -28,6 +28,7 @@ while true; do
             break;;
             4) echo "Vom actualiza inregistrarea!"; 
             echo;
+            /bin/bash ./function4.sh
             break;;
             5)
             echo;
