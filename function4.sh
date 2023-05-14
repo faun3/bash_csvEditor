@@ -100,7 +100,25 @@ while true; do
                             # grade = newEntryGrade
                             index=$((linePos-1))
                             {
-                                awk -F ',' -v OFS=',' -v name=$newEntryName -v email=$newEntryEmail -v grade=$newEntryGrade '/^$index/ {$2 = name; $3 = email; $4 = grade; print;}' data.csv > copy.csv
+                                awk -F ',' -v OFS=',' -v ind=$index -v name=$newEntryName -v email=$newEntryEmail -v grade=$newEntryGrade '
+                                {
+                                    
+                                    if (ind == $1) 
+                                    {
+                                        $2 = name; 
+                                        $3 = email; 
+                                        $4 = grade; 
+                                        print $1,name,email,grade
+                                    } 
+                                    else 
+                                    {
+                                        print $1,$2,$3,$4
+                                    }
+                                }
+                                ' data.csv > copy.csv
+                                mv copy.csv data.csv
+                                head -c -1 data.csv > copy.csv
+                                mv copy.csv data.csv
                             }
             else
                 exit
