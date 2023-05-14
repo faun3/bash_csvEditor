@@ -33,7 +33,6 @@ while true; do
                     do
                         read -p "Introduceti numele: " newEntryName
 
-                        # matches 3 or more letters (capital or lowercase)
                         regex="[a-zA-Z]{3,}"
 
                         if [[  $newEntryName =~ $regex ]]
@@ -70,16 +69,6 @@ while true; do
                             do
                                 read -p "Introduceti nota: " newEntryGrade
 
-                                #match digits 1-9 OR the string "10"
-                                    #at the start of the string
-                                    #we use () to surround a group so we can use "|" to OR the choices
-
-                                    # digits 1-9 get matched fully, so does "10"
-                                    # 11 does not get matched even partially
-                                    # -1 does not get matched even partially
-
-                                    #$ matches no other characters after so something like "1 0" won't trigger a match
-
                                 regex="^([1-9]|10)$"
 
                                 if [[ $newEntryGrade =~ $regex ]]
@@ -93,13 +82,11 @@ while true; do
                                     fi
                                 fi
                             done
-
-                            # id = linePos
-                            # name = newEntryName
-                            # email = newEntryEmail
-                            # grade = newEntryGrade
+                            
                             index=$((linePos-1))
                             {
+                                # -F for setting field separator to comma
+                                # -v sets variables for use inside of our awk command
                                 awk -F ',' -v OFS=',' -v ind=$index -v name=$newEntryName -v email=$newEntryEmail -v grade=$newEntryGrade '
                                 {
                                     
@@ -117,6 +104,8 @@ while true; do
                                 }
                                 ' data.csv > copy.csv
                                 mv copy.csv data.csv
+                                # -c prints the leading number of bytes in the file;
+                                #   passing -1 means we print the whole file except the last one byte (a newline added by awk)
                                 head -c -1 data.csv > copy.csv
                                 mv copy.csv data.csv
                             }
