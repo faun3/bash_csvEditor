@@ -3,7 +3,7 @@
 maxLines=$(wc -l < data.csv)
 regex='^[0-9]+$'
 
-read -p "Introduceti numarul de elevi: " lineNumber
+read -p "Introduceti indexul unde vreti sa efectuati modifcarea: " lineNumber
 
 while true; do
     if ! [[ $lineNumber =~ $regex ]]; then
@@ -98,7 +98,10 @@ while true; do
                             # name = newEntryName
                             # email = newEntryEmail
                             # grade = newEntryGrade
-                            sed -i "/^$linePos/s/,$newEntryName/,$newEntryEmail/,/$newEntryGrade/" copy.csv
+                            index=$((linePos-1))
+                            {
+                                awk -F ',' -v OFS=',' -v name=$newEntryName -v email=$newEntryEmail -v grade=$newEntryGrade '/^$index/ {$2 = name; $3 = email; $4 = grade; print;}' data.csv > copy.csv
+                            }
             else
                 exit
             fi
