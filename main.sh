@@ -8,7 +8,6 @@ optiuni=("Creati fisier .csv" "Adauga inregistrare" "Sterge o inregistrare" "Act
 
 #loop forever
 while true; do
-    echo
     #selects from the array of options and an extra quit option
     select optiune in "${optiuni[@]}" Iesire
     do
