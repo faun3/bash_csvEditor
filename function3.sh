@@ -7,26 +7,50 @@ fi
 
 read -p "Indexul la care vreti sa efectuati stergerea este: " deleteIndex
 
-linePos=$((deleteIndex+1))
-linie=$(sed "${linePos}q;d" data.csv)
+regex='^[0-9]+$'
 
 while true; do
-    if [ -n "$linie" ]; then
-        echo "Se va sterge urmatoarea linie: "
-        echo $linie
-        echo
-        break 2;
+    if ! [[ $deleteIndex =~ $regex ]]; then
+        read -p "Valoarea introdusa nu pare sa fie un numar. Apasati tasta 1 pentru a introduce o alta valoare sau orice alta tasta pentru a anula aceasta operatie de stergere: " choice
+        if [[ $choice == 1 ]]; then
+            read -p "Indexul la care vreti sa efectuati stergerea este: " deleteIndex
+            linePos=$((deleteIndex+1))
+            linie=$(sed "${linePos}q;d" data.csv)
+        else
+
+            exit
+        fi
     else
-        echo "Acel index nu exista in fisier!"
-        lineCount=$(wc -l < data.csv)
-        echo "Fisierul are doar ${lineCount-1} inregistrari" 
-        read -p "Indexul la care vreti sa efectuati stergerea este: " deleteIndex
-        linePos=$((deleteIndex+1))
-        linie=$(sed "${linePos}q;d" data.csv)
+        if [[ $deleteIndex == 0 ]]; then
+            read -p "Valoarea introdusa este 0. Apasati tasta 1 pentru a introduce o alta valoare sau oricare alta tasta pentru a anula aceasta operatie de stergere: " choice
+            if [[ $choice == 1 ]]; then
+                read -p "Indexul la care vreti sa efectuati stergerea este: " deleteIndex
+                linePos=$((deleteIndex+1))
+                linie=$(sed "${linePos}q;d" data.csv)
+            else
+                exit
+            fi
+        else
+            if [ -n "$linie" ]; then
+                linePos=$((deleteIndex+1))
+                linie=$(sed "${linePos}q;d" data.csv)
+                echo "Se va sterge urmatoarea linie: "
+                echo $linie
+                echo
+                break 2;
+            else
+                echo "Acel index nu exista in fisier!"
+                lineCount=$(wc -l < data.csv)
+                echo "Fisierul are doar ${lineCount-1} inregistrari" 
+                read -p "Indexul la care vreti sa efectuati stergerea este: " deleteIndex
+                linePos=$((deleteIndex+1))
+                linie=$(sed "${linePos}q;d" data.csv)
+            fi
+        fi
     fi
 done
 
-read -p "Daca doriti sa stergeti PERMANENT aceasta linie din fisier, apasati tasta \"1\", sau orice alta tasta pentru a anula aceasta operatie de stergere: " choice
+read -p "Daca doriti sa stergeti PERMANENT aceasta linie din fisier, apasati tasta 1, sau orice alta tasta pentru a anula aceasta operatie de stergere: " choice
 
 if [ $choice == 1 ]
 then
