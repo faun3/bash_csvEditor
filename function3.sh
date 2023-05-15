@@ -31,7 +31,8 @@ while true; do
                 exit
             fi
         else
-            if [ -n "$linie" ]; then
+            lineCount=$(wc -l < data.csv)
+            if [[ $deleteIndex -le $lineCount ]]; then
                 linePos=$((deleteIndex+1))
                 linie=$(sed "${linePos}q;d" data.csv)
                 echo "Se va sterge urmatoarea linie: "
