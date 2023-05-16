@@ -42,4 +42,5 @@ while true; do
             break;;
         esac
     done
+    echo
 done
